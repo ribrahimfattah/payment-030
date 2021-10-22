@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\ribra\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\ribra\\.nuget\\packages"
+    ]
+  }
+}
