@@ -39,7 +39,13 @@ namespace PaymentDetails.Controllers
                 await _context.Payments.AddAsync(data);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetPayments", new { data.PaymentDataId }, data);
+                // return CreatedAtAction("GetPayments", new { data.PaymentDataId }, data);
+                var existPayment = await _context.Payments.FirstOrDefaultAsync(x => x.PaymentDataId == data.PaymentDataId);
+                object[] result = new object[2];
+                result[0] = "Berhasil tambah data!";
+                // result[1] = CreatedAtAction("GetPayments", new { payment.PaymentDataId }, payment);
+                result[1] = existPayment;
+                return Ok(result);
             }
             return new JsonResult("Something went wrong") { StatusCode = 500 };
         }
