@@ -16,7 +16,7 @@ namespace PaymentDetails.Controllers
 {
     [Route("finalproject/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PaymentDetailsController : ControllerBase
     {
         private readonly ApiDbContext _context;
@@ -87,7 +87,7 @@ namespace PaymentDetails.Controllers
             existPayment.SecurityCode = payment.SecurityCode;
 
             await _context.SaveChangesAsync();
-            
+
             object[] result = new object[2];
             result[0] = "Berhasil update data!";
             // result[1] = CreatedAtAction("GetPayments", new { payment.PaymentDataId }, payment);
