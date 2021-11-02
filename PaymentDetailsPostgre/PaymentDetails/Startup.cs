@@ -48,7 +48,8 @@ namespace PaymentDetails
             };
 
             services.AddSingleton(tokenValidationParameters);
-            services.AddAuthentication(options => {
+            services.AddAuthentication(options =>
+            {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -64,8 +65,8 @@ namespace PaymentDetails
 
             services.AddControllers();
 
-            services.AddDbContext<ApiDbContext>( options => 
-                options.UseNpgsql("Host=ec2-54-204-148-110.compute-1.amazonaws.com;Port=5432;Database=deiumj7gpa56du;Username=yfehtqexfhndcy;Pwd=c7ce85cd128d2ce781418c805c88b145411d2c52064183492964ea563f94d0c2;SSL Mode=Require;Trust Server Certificate=true")
+            services.AddDbContext<ApiDbContext>(options =>
+               options.UseNpgsql("Host=ec2-54-204-148-110.compute-1.amazonaws.com;Port=5432;Database=deiumj7gpa56du;Username=yfehtqexfhndcy;Pwd=c7ce85cd128d2ce781418c805c88b145411d2c52064183492964ea563f94d0c2;SSL Mode=Require;Trust Server Certificate=true")
             );
 
             services.AddSwaggerGen(c =>
@@ -95,6 +96,7 @@ namespace PaymentDetails
                 });
 
             });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,6 +112,10 @@ namespace PaymentDetails
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthentication();
 
